@@ -1,0 +1,42 @@
+{
+  "name": "values-iterator",
+  "version": "1.0.0",
+  "description": "Returns an iterator of the values of an Array, Iterator, Object, Map, Set, or Typed Array.",
+  "keywords": [
+    "array",
+    "iterator",
+    "map",
+    "object",
+    "set",
+    "typed array",
+    "values"
+  ],
+  "author": "John Lamansky",
+  "license": "MIT",
+  "homepage": "https://github.com/lamansky/values-iterator",
+  "repository": "lamansky/values-iterator",
+  "main": "index.js",
+  "files": [],
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "dependencies": {
+    "is-instance-of": "^1.0.0",
+    "is-iterator": "^1.0.1",
+    "sbo": "^1.0.0",
+    "typed-arrays": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-lamansky": "^1.0.0",
+    "mocha": "^5.0.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "eslintConfig": {
+    "extends": "lamansky",
+    "env": {
+      "mocha": true
+    }
+  }
+}
