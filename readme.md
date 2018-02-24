@@ -4,7 +4,7 @@ Returns an iterator of the values of an Array, Iterator, Object, Map, Set, or Ty
 
 ## Installation
 
-Requires [Node.js](https://nodejs.org/) 6.0.0 or above.
+Requires [Node.js](https://nodejs.org/) 7.0.0 or above.
 
 ```bash
 npm i values-iterator
