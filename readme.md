@@ -14,9 +14,13 @@ npm i values-iterator
 
 The module exports a single function.
 
-### Parameter
+### Parameters
 
-Bindable: `c` (Array, Iterator, Object, Map, Set, or Typed Array)
+1. Bindable: `c` (Array, iterator, Object, Map, Set, string, or Typed Array)
+2. Object argument:
+    * Optional: `arrays` / `maps` / `sets` (array, class, or string): A class that should be treated as equivalent to `Array`/`Map`/`Set` (respectively), the string name of such a class, or an array of such classes/strings.
+    * Optional: `inObj` (boolean): Whether or not to act like the “in” operator by including inherited Object property values. Only takes effect if `c` is an Object (i.e. not another recognized type). Defaults to `false`.
+    * Optional: `reflectObj` (boolean): Whether or not to use reflection to include non-enumerable Object property values. Only takes effect if `c` is an Object (i.e. not another recognized type). Defaults to `false`.
 
 ### Return Value
 
@@ -81,6 +85,36 @@ const obj = {key: 'value'}
 obj::values()
 ```
 
+#### Inherited Object Properties
+
+Include Object property values from the prototype chain by setting `inObj` to `true`:
+
+```javascript
+const values = require('values-iterator')
+
+function Cls () {}
+Cls.prototype.key = 'value'
+
+const i = values(new Cls(), {inObj: true})
+i.next().value // 'value'
+i.next().done // true
+```
+
+#### Non-Enumerable Object Properties
+
+Include non-enumerable Object property values by setting `reflectObj` to `true`:
+
+```javascript
+const values = require('values-iterator')
+
+const obj = {}
+Object.defineProperty(obj, 'key', {value: 'value', enumerable: false})
+
+const i = values(obj, {reflectObj: true})
+i.next().value // 'value'
+i.next().done // true
+```
+
 ### Sets
 
 ```javascript
@@ -93,6 +127,19 @@ set.add('second')
 const i = values(set)
 i.next().value // 'first'
 i.next().value // 'second'
+i.next().done // true
+```
+
+### Strings
+
+`values-iterator` will treat a string like a character array.
+
+```javascript
+const values = require('values-iterator')
+
+const i = keys('hi')
+i.next().value // 'h'
+i.next().value // 'i'
 i.next().done // true
 ```
 

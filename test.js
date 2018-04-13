@@ -30,6 +30,28 @@ describe('valuesIterator()', function () {
     assert.strictEqual(i.next().done, true)
   })
 
+  it('should iterate values of a custom Map class', function () {
+    class MyMap {
+      values () { return ['value'] }
+    }
+    assert.strictEqual(values(new MyMap()).next().done, true)
+    const i = values(new MyMap(), {maps: MyMap})
+    assert(isIterator(i))
+    assert.strictEqual(i.next().value, 'value')
+    assert.strictEqual(i.next().done, true)
+  })
+
+  it('should iterate values of a custom Map class referenced by name string', function () {
+    class MyMap {
+      values () { return ['value'] }
+    }
+    assert.strictEqual(values(new MyMap()).next().done, true)
+    const i = values(new MyMap(), {maps: 'MyMap'})
+    assert(isIterator(i))
+    assert.strictEqual(i.next().value, 'value')
+    assert.strictEqual(i.next().done, true)
+  })
+
   it('should iterate Object values', function () {
     const i = values({key: 'value'})
     assert(isIterator(i))
@@ -37,11 +59,36 @@ describe('valuesIterator()', function () {
     assert.strictEqual(i.next().done, true)
   })
 
+  it('should iterate inherited Object property values if `inObj` is true', function () {
+    function A () {}
+    A.prototype.key = 'value'
+    const a = Array.from(values(new A(), {inObj: true}))
+    assert.strictEqual(a.length, 1)
+    assert(a.some(v => v === 'value'))
+  })
+
+  it('should iterate non-enumerable Object prop values if `reflectObj` is true', function () {
+    const obj = {}
+    Object.defineProperty(obj, 'key', {value: 'value', enumerable: false})
+    assert.strictEqual(Array.from(values(obj)).length, 0)
+    const a = Array.from(values(obj, {reflectObj: true}))
+    assert.strictEqual(a.length, 1)
+    assert(a.some(v => v === 'value'))
+  })
+
   it('should iterate Set values', function () {
     const i = values(new Set(['a', 'b']))
     assert(isIterator(i))
     assert.strictEqual(i.next().value, 'a')
     assert.strictEqual(i.next().value, 'b')
+    assert.strictEqual(i.next().done, true)
+  })
+
+  it('should iterate String characters', function () {
+    const i = values('hi')
+    assert(isIterator(i))
+    assert.strictEqual(i.next().value, 'h')
+    assert.strictEqual(i.next().value, 'i')
     assert.strictEqual(i.next().done, true)
   })
 

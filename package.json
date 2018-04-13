@@ -8,6 +8,7 @@
     "map",
     "object",
     "set",
+    "string",
     "typed array",
     "values"
   ],
@@ -23,6 +24,7 @@
   "dependencies": {
     "is-instance-of": "^1.0.0",
     "is-iterator": "^1.0.1",
+    "prop-values": "^1.0.0",
     "sbo": "^1.0.0",
     "typed-arrays": "^1.0.0"
   },
