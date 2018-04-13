@@ -114,4 +114,5 @@ i.next().done // true
 * [entries-array](https://github.com/lamansky/entries-array)
 * [keys-iterator](https://github.com/lamansky/keys-iterator)
 * [keys-array](https://github.com/lamansky/keys-array)
+* [prop-values](https://github.com/lamansky/prop-values)
 * [values-array](https://github.com/lamansky/values-array)
