@@ -1,6 +1,6 @@
 {
   "name": "values-iterator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Returns an iterator of the values of an Array, Iterator, Object, Map, Set, or Typed Array.",
   "keywords": [
     "array",
