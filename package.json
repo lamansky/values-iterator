@@ -22,8 +22,10 @@
     "node": ">=7.0.0"
   },
   "dependencies": {
+    "empty-iterator": "^1.0.0",
     "is-instance-of": "^1.0.0",
     "is-iterator": "^1.0.1",
+    "is-object": "^1.0.1",
     "prop-values": "^1.0.0",
     "sbo": "^1.0.0",
     "typed-arrays": "^1.0.0"
